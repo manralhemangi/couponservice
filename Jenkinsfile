@@ -9,7 +9,7 @@ pipeline {
         // Environment variables for credentials and Git repository
         GIT_REPO = 'https://github.com/manralhemangi/couponservice'
         GIT_CREDENTIALS_ID = 'manralhemangi'
-        DOCKER_HUB_USER = 'manralhemangi'  // Update this
+        DOCKER_HUB_USER = 'hemangimanral'  // Update this
         APP_IMAGE = 'couponservice'
         DB_IMAGE = 'mysql:8'  // Keeping the official MySQL image
 
