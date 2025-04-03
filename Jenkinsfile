@@ -85,7 +85,7 @@ pipeline {
         //             bat 'docker-compose logs'
         //         }
         //     }
-        }
+        // }
          
     }
 }
