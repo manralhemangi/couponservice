@@ -58,7 +58,7 @@ pipeline {
            stage('Build and Push Docker Images') {
             steps {
                 script {
-                    withCredentials([usernamePassword(credentialsId: 'docker_hub_credentials', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASS')]) {                   
+                    withCredentials([usernamePassword(credentialsId: 'docker_credentials', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASS')]) {                   
                     bat "docker login -u manralhemangi -p ${docker_credentials}"
                     echo 'Building Docker image for the application...'
                     bat "docker build --no-cache -t ${DOCKER_HUB_USER}/${APP_IMAGE}:latest ."
