@@ -34,7 +34,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Running Maven clean install...'
-                bat 'mvn clean install' // Runs the Maven clean install package
+                bat 'mvn clean install' // Runs the Maven clean install 
             }
         }
         
