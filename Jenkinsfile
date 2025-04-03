@@ -59,8 +59,8 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker_credentials', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASS')]) {                   
-                    // bat "docker login -u hemangimanral -p ${DOCKER_HUB_PASS}"
-                    bat "echo ${DOCKER_HUB_PASS} | docker login -u hemangimanral --password-stdin"
+                    bat "docker login -u hemangimanral -p ${DOCKER_HUB_PASS}"
+                    // bat " docker login -u hemangimanral --password-stdin"
 
                     
                     echo 'Building Docker image for the application...'
