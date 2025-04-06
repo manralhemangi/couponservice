@@ -6,12 +6,12 @@ pipeline {
     }
     
     environment {
-        // Environment variables for credentials and Git repository
+        // Environment variables for credentials and Git repository-
         GIT_REPO = 'https://github.com/manralhemangi/couponservice'
         GIT_CREDENTIALS_ID = 'manralhemangi'
         DOCKER_HUB_USER = 'hemangimanral'  // Update this
         APP_IMAGE = 'couponservice'
-        DB_IMAGE = 'mysql:8'  // Keeping the official MySQL image
+        DB_IMAGE = 'coupondb'  // Keeping the official MySQL image
 
     }
 
@@ -51,7 +51,7 @@ pipeline {
         //         SONAR_AUTH_TOKEN = credentials('SonarQubeNew')
         //     }
         //  steps{
-        //          bat "mvn sonar:sonar -Dsonar.projectKey=InterestCalculatorPipeline -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_AUTH_TOKEN"
+        //          bat "mvn sonar:sonar -Dsonar.projectKey=couponService -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_AUTH_TOKEN"
         //     }
         // }
         
@@ -60,8 +60,6 @@ pipeline {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'docker_credentials', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASS')]) {                   
                     bat "docker login -u hemangimanral -p ${DOCKER_HUB_PASS}"
-                    // bat " docker login -u hemangimanral --password-stdin"
-
                     
                     echo 'Building Docker image for the application...'
                     bat "docker build --no-cache -t ${DOCKER_HUB_USER}/${APP_IMAGE}:latest ."
@@ -73,22 +71,22 @@ pipeline {
             }
         }
 
-        // stage('Deploy with Docker Compose') {
-        //     steps {
-        //         script {
-        //             echo 'Stopping existing containers...'
-        //             bat 'docker-compose down'
+        stage('Deploy with Docker Compose') {
+            steps {
+                script {
+                    echo 'Stopping existing containers...'
+                    bat 'docker-compose down'
 
-        //             echo 'Pulling latest images...'
-        //             bat "docker pull ${DOCKER_HUB_USER}/${APP_IMAGE}:latest"
+                    echo 'Pulling latest images...'
+                    bat "docker pull ${DOCKER_HUB_USER}/${APP_IMAGE}:latest"
 
-        //             echo 'Starting new deployment...'
-        //             bat 'docker-compose up -d'
+                    echo 'Starting new deployment...'
+                    bat 'docker-compose up -d'
                     
-        //             echo 'Showing docker compose logs'
-        //             bat 'docker-compose logs'
-        //         }
-        //     }
+                    echo 'Showing docker compose logs'
+                    bat 'docker-compose logs'
+                }
+            }
         }
          
     }
