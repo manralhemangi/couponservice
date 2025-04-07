@@ -33,7 +33,7 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
-        //
+        //test
         stage('Archive Artifact') {
             steps {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
