@@ -33,7 +33,7 @@ pipeline {
                 bat 'mvn clean install'
             }
         }
-        
+        //
         stage('Archive Artifact') {
             steps {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
@@ -76,11 +76,7 @@ pipeline {
                     echo 'Pulling latest images...'
                     bat "docker pull ${DOCKER_HUB_USER}/${APP_IMAGE}:latest"
 
-                    echo 'Starting new deployment...'
-                    bat 'docker compose up -d'
 
-                    echo 'Showing docker compose logs'
-                    bat 'docker compose logs'
                 }
             }
         }
